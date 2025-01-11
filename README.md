@@ -1,35 +1,31 @@
-<h1 align="center">Deepseek Performance Monitoring</h1>
+<div align="center">
+  <h1>📊 Deepseek Performance Monitoring</h1>
+  
+  <p>
+    <img src="https://img.shields.io/badge/Material-Design-blue?style=flat&logo=material-design&logoColor=white" alt="Material Design">
+    <img src="https://img.shields.io/badge/Python-3.8+-blue?style=flat&logo=python&logoColor=white" alt="Python">
+    <img src="https://img.shields.io/badge/License-MIT-green?style=flat" alt="License">
+  </p>
+  
+  <p>
+    <img src="https://img.shields.io/github/last-commit/tom-doerr/llm_api_testing?style=flat&color=6200ea" alt="Last Commit">
+    <img src="https://img.shields.io/github/repo-size/tom-doerr/llm_api_testing?style=flat&color=6200ea" alt="Repo Size">
+    <img src="https://img.shields.io/github/languages/code-size/tom-doerr/llm_api_testing?style=flat&color=6200ea" alt="Code Size">
+  </p>
+  
+  <p>
+    <strong>A comprehensive performance monitoring solution for Deepseek API using LiteLLM</strong>
+  </p>
+</div>
 
-<p align="center">
-  <a href="https://github.com/tom-doerr/llm_api_testing/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="License">
-  </a>
-  <a href="https://www.python.org/">
-    <img src="https://img.shields.io/badge/Python-3.8+-blue.svg?style=flat-square" alt="Python Version">
-  </a>
-  <a href="https://github.com/tom-doerr/llm_api_testing">
-    <img src="https://img.shields.io/github/last-commit/tom-doerr/llm_api_testing?style=flat-square" alt="Last Commit">
-  </a>
-  <a href="https://github.com/tom-doerr/llm_api_testing">
-    <img src="https://img.shields.io/github/repo-size/tom-doerr/llm_api_testing?style=flat-square" alt="Repo Size">
-  </a>
-  <a href="https://github.com/tom-doerr/llm_api_testing">
-    <img src="https://img.shields.io/github/languages/code-size/tom-doerr/llm_api_testing?style=flat-square" alt="Code Size">
-  </a>
-</p>
-
-<p align="center">
-  A comprehensive performance monitoring solution for Deepseek API using LiteLLM
-</p>
-
-## Features
+## 🚀 Features
 - Measures response latency in milliseconds
 - Calculates tokens processed per second
 - Runs in 1-minute intervals
 - Logs results to CSV file
 - Runs for 24 hours
 
-## Usage
+## 🛠️ Usage
 
 1. Ensure LiteLLM is installed and configured
 2. Set your Deepseek API key as an environment variable:
@@ -42,7 +38,7 @@ export DEEPSEEK_API_KEY='your_api_key_here'
 python3 deepseek_performance_monitor.py
 ```
 
-## Output
+## 📈 Output
 
 The script creates a CSV file `deepseek_performance.csv` with the following columns:
 - timestamp: Measurement time
@@ -51,19 +47,19 @@ The script creates a CSV file `deepseek_performance.csv` with the following colu
 - tokens_per_second: Tokens processed per second
 - total_tokens: Total tokens in the response
 
-## Example Output
+## 📋 Example Output
 ```
 2025-01-11 04:02:02 - Latency: 1550.53ms, TPS: 9.67, Tokens: 15
 2025-01-11 04:03:04 - Latency: 1317.85ms, TPS: 11.38, Tokens: 15
 2025-01-11 04:04:05 - Latency: 1375.23ms, TPS: 10.91, Tokens: 15
 ```
 
-## Requirements
+## 📦 Requirements
 - Python 3
 - LiteLLM
 - Deepseek API key
 
-## Notes
+## 📝 Notes
 - The script will run for 24 hours unless interrupted
 - Errors are logged to console but don't stop execution
 - Results are saved to CSV for later analysis
