@@ -14,7 +14,7 @@
   </p>
   
   <p>
-    <strong>A comprehensive performance monitoring solution for Deepseek API using LiteLLM</strong>
+    <strong>A performance monitoring solution for Deepseek API using LiteLLM</strong>
   </p>
 </div>
 
