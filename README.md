@@ -1,17 +1,20 @@
 <h1 align="center">Deepseek Performance Monitoring</h1>
 
 <p align="center">
-  <a href="https://github.com/tom-doerr/llm_api_testing/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/tom-doerr/llm_api_testing/ci.yml?style=flat-square" alt="CI Status">
-  </a>
   <a href="https://github.com/tom-doerr/llm_api_testing/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/tom-doerr/llm_api_testing?style=flat-square" alt="License">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="License">
   </a>
-  <a href="https://github.com/tom-doerr/llm_api_testing/releases">
-    <img src="https://img.shields.io/github/v/release/tom-doerr/llm_api_testing?style=flat-square" alt="Release">
+  <a href="https://www.python.org/">
+    <img src="https://img.shields.io/badge/Python-3.8+-blue.svg?style=flat-square" alt="Python Version">
   </a>
-  <a href="https://github.com/tom-doerr/llm_api_testing/issues">
-    <img src="https://img.shields.io/github/issues/tom-doerr/llm_api_testing?style=flat-square" alt="Issues">
+  <a href="https://github.com/tom-doerr/llm_api_testing">
+    <img src="https://img.shields.io/github/last-commit/tom-doerr/llm_api_testing?style=flat-square" alt="Last Commit">
+  </a>
+  <a href="https://github.com/tom-doerr/llm_api_testing">
+    <img src="https://img.shields.io/github/repo-size/tom-doerr/llm_api_testing?style=flat-square" alt="Repo Size">
+  </a>
+  <a href="https://github.com/tom-doerr/llm_api_testing">
+    <img src="https://img.shields.io/github/languages/code-size/tom-doerr/llm_api_testing?style=flat-square" alt="Code Size">
   </a>
 </p>
 
