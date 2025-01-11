@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import time
+import os
 import csv
 from datetime import datetime, timedelta
 from litellm import completion
@@ -22,9 +23,13 @@ def measure_request():
 
 def main():
     end_time = datetime.now() + timedelta(hours=24)
-    with open('deepseek_performance.csv', 'w', newline='') as csvfile:
+    # Check if file exists to determine if we need to write header
+    write_header = not os.path.exists('deepseek_performance.csv')
+    
+    with open('deepseek_performance.csv', 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(['timestamp', 'latency_ms', 'tokens_per_second', 'total_tokens'])
+        if write_header:
+            writer.writerow(['timestamp', 'latency_ms', 'tokens_per_second', 'total_tokens'])
         
         while datetime.now() < end_time:
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
