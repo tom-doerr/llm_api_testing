@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import time
 import csv
 from datetime import datetime, timedelta
