@@ -7,7 +7,7 @@ def measure_request():
     start_time = time.time()
     response = completion(
         model="deepseek/deepseek-chat",
-        messages=[{"role": "user", "content": "hello"}]
+        messages=[{"role": "user", "content": "Tell me about ancient Rome"}]
     )
     end_time = time.time()
     
@@ -33,7 +33,8 @@ def main():
             except Exception as e:
                 print(f"Error: {e}")
             
-            time.sleep(60)
+            # time.sleep(60)
+            time.sleep(2)
 
 if __name__ == "__main__":
     main()
