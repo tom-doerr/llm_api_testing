@@ -26,7 +26,8 @@ python3 deepseek_performance_monitor.py
 
 The script creates a CSV file `deepseek_performance.csv` with the following columns:
 - timestamp: Measurement time
-- latency_ms: Response latency in milliseconds
+- first_token_latency_ms: Time to first token in milliseconds
+- total_latency_ms: Total response time in milliseconds
 - tokens_per_second: Tokens processed per second
 - total_tokens: Total tokens in the response
 
