@@ -1,17 +1,17 @@
 <h1 align="center">Deepseek Performance Monitoring</h1>
 
 <p align="center">
-  <a href="https://github.com/tom_doerr/llm_api_testing/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/tom_doerr/llm_api_testing/ci.yml?style=flat-square" alt="CI Status">
+  <a href="https://github.com/tom-doerr/llm_api_testing/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/tom-doerr/llm_api_testing/ci.yml?style=flat-square" alt="CI Status">
   </a>
-  <a href="https://github.com/tom_doerr/llm_api_testing/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/tom_doerr/llm_api_testing?style=flat-square" alt="License">
+  <a href="https://github.com/tom-doerr/llm_api_testing/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/tom-doerr/llm_api_testing?style=flat-square" alt="License">
   </a>
-  <a href="https://github.com/tom_doerr/llm_api_testing/releases">
-    <img src="https://img.shields.io/github/v/release/tom_doerr/llm_api_testing?style=flat-square" alt="Release">
+  <a href="https://github.com/tom-doerr/llm_api_testing/releases">
+    <img src="https://img.shields.io/github/v/release/tom-doerr/llm_api_testing?style=flat-square" alt="Release">
   </a>
-  <a href="https://github.com/tom_doerr/llm_api_testing/issues">
-    <img src="https://img.shields.io/github/issues/tom_doerr/llm_api_testing?style=flat-square" alt="Issues">
+  <a href="https://github.com/tom-doerr/llm_api_testing/issues">
+    <img src="https://img.shields.io/github/issues/tom-doerr/llm_api_testing?style=flat-square" alt="Issues">
   </a>
 </p>
 
