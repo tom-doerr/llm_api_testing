@@ -15,7 +15,6 @@ def measure_request():
         model="deepseek/deepseek-chat",
         messages=[{"role": "user", "content": "Tell me about ancient Rome"}],
         stream=True,
-        max_tokens=1000
     )
     
     for chunk in response:
@@ -34,7 +33,7 @@ def measure_request():
     return time_to_first_token, total_time, tokens_per_second, total_tokens
 
 def main():
-    end_time = datetime.now() + timedelta(hours=24)
+    end_time = datetime.now() + timedelta(hours=72)
     # Check if file exists to determine if we need to write header
     write_header = not os.path.exists('deepseek_performance.csv')
     
@@ -65,8 +64,8 @@ def main():
             except Exception as e:
                 print(f"Error: {e}")
             
-            # time.sleep(60)
-            time.sleep(2)
+            time.sleep(60)
+            # time.sleep(2)
 
 if __name__ == "__main__":
     main()
