@@ -29,7 +29,6 @@ def plot_data(df, output_dir):
     ax1.set_xlabel('Time')
     ax1.set_ylabel('Latency (ms)', color='tab:blue')
     ax1.plot(df['timestamp'], df['first_token_latency_ms'], label='First Token Latency', color='tab:blue', alpha=0.7)
-    ax1.plot(df['timestamp'], df['total_latency_ms'], label='Total Latency', color='tab:cyan', alpha=0.7)
     ax1.tick_params(axis='y', labelcolor='tab:blue')
     ax1.legend(loc='upper left')
     
