@@ -21,7 +21,9 @@ def measure_request():
     for chunk in response:
         if first_token_time is None:
             first_token_time = time.time()
-        total_tokens += len(chunk['choices'][0]['delta'].get('content', '').split())
+        content = chunk['choices'][0]['delta'].get('content', '')
+        if content:  # Only count tokens if content exists
+            total_tokens += len(content.split())
     
     end_time = time.time()
     
