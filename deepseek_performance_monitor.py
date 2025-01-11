@@ -36,6 +36,7 @@ def main():
             try:
                 latency, tps, tokens = measure_request()
                 writer.writerow([timestamp, latency, tps, tokens])
+                csvfile.flush()  # Ensure data is written to disk immediately
                 print(f"{timestamp} - Latency: {latency:.2f}ms, TPS: {tps:.2f}, Tokens: {tokens}")
             except Exception as e:
                 print(f"Error: {e}")
