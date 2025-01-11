@@ -48,6 +48,27 @@ The script creates a CSV file `deepseek_performance.csv` with the following colu
 - total_tokens: Total tokens in the response
 
 ## 📋 Example Output
+
+### Performance Plot
+![Performance Plot](performance_results/performance_plot.png)
+
+### Example Statistics
+```plaintext
+Average TPS: 10.25
+Max TPS: 15.30
+Min TPS: 8.50
+
+Average First Token Latency: 1200.50 ms
+Max First Token Latency: 1500.75 ms
+Min First Token Latency: 1000.25 ms
+
+Average Total Latency: 2500.75 ms
+Max Total Latency: 3000.50 ms
+Min Total Latency: 2000.25 ms
+
+Total Tokens Processed: 15000
+Total Requests: 1000
+```
 ```
 2025-01-11 04:02:02 - Latency: 1550.53ms, TPS: 9.67, Tokens: 15
 2025-01-11 04:03:04 - Latency: 1317.85ms, TPS: 11.38, Tokens: 15
