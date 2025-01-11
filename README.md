@@ -1,6 +1,23 @@
-# Deepseek Performance Monitoring
+<h1 align="center">Deepseek Performance Monitoring</h1>
 
-This script monitors the performance of Deepseek API using LiteLLM, measuring latency and tokens per second over a 24-hour period.
+<p align="center">
+  <a href="https://github.com/tom_doerr/llm_api_testing/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/tom_doerr/llm_api_testing/ci.yml?style=flat-square" alt="CI Status">
+  </a>
+  <a href="https://github.com/tom_doerr/llm_api_testing/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/tom_doerr/llm_api_testing?style=flat-square" alt="License">
+  </a>
+  <a href="https://github.com/tom_doerr/llm_api_testing/releases">
+    <img src="https://img.shields.io/github/v/release/tom_doerr/llm_api_testing?style=flat-square" alt="Release">
+  </a>
+  <a href="https://github.com/tom_doerr/llm_api_testing/issues">
+    <img src="https://img.shields.io/github/issues/tom_doerr/llm_api_testing?style=flat-square" alt="Issues">
+  </a>
+</p>
+
+<p align="center">
+  A comprehensive performance monitoring solution for Deepseek API using LiteLLM
+</p>
 
 ## Features
 - Measures response latency in milliseconds
