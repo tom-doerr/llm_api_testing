@@ -18,6 +18,9 @@
   </p>
 </div>
 
+### Performance Plot
+![Performance Plot](performance_results/performance_plot.png)
+
 ## 🚀 Features
 - Measures response latency in milliseconds
 - Calculates tokens processed per second
@@ -48,9 +51,6 @@ The script creates a CSV file `deepseek_performance.csv` with the following colu
 - total_tokens: Total tokens in the response
 
 ## 📋 Example Output
-
-### Performance Plot
-![Performance Plot](performance_results/performance_plot.png)
 
 ### Performance Statistics
 ```plaintext
