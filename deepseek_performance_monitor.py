@@ -37,6 +37,15 @@ def measure_request():
     # Generate random prompt
     prompt_content = generate_random_prompt()
     
+    # First get prompt tokens from a non-streaming request
+    initial_response = completion(
+        model="deepseek/deepseek-chat",
+        messages=[{"role": "user", "content": prompt_content}],
+        stream=False,
+    )
+    prompt_tokens = initial_response.get('usage', {}).get('prompt_tokens', 0)
+    
+    # Then make the streaming request for timing measurements
     response = completion(
         model="deepseek/deepseek-chat",
         messages=[{"role": "user", "content": prompt_content}],
@@ -46,8 +55,6 @@ def measure_request():
     for chunk in response:
         if first_token_time is None:
             first_token_time = time.time()
-            # Get prompt tokens from the first chunk
-            prompt_tokens = chunk.get('usage', {}).get('prompt_tokens', 0)
         content = chunk['choices'][0]['delta'].get('content', '')
         if content:  # Only count tokens if content exists
             total_tokens += len(content.split())
