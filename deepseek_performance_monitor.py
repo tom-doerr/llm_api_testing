@@ -13,7 +13,7 @@ def generate_random_prompt():
     import math
     
     # Generate length with log distribution (more short prompts)
-    min_length = 10  # Minimum 10 characters
+    min_length = 1  
     max_length = 1000000  # Maximum 1 million characters
     log_min = math.log(min_length)
     log_max = math.log(max_length)
@@ -23,6 +23,8 @@ def generate_random_prompt():
     # Generate random content
     characters = string.ascii_letters + string.digits + string.punctuation + ' '
     content = ''.join(random.choice(characters) for _ in range(length))
+    print("content:", content)
+    print("length:", length)
     
     return content
 
@@ -54,7 +56,8 @@ def measure_request():
     
     time_to_first_token = (first_token_time - start_time) * 1000 if first_token_time else 0
     total_time = (end_time - start_time) * 1000
-    tokens_per_second = total_tokens / (end_time - start_time) if (end_time - start_time) > 0 else 0
+    # tokens_per_second = total_tokens / (end_time - start_time) if (end_time - start_time) > 0 else 0
+    tokens_per_second = total_tokens / (end_time - first_token_time)
     
     return time_to_first_token, total_time, tokens_per_second, total_tokens, prompt_tokens
 
@@ -92,8 +95,8 @@ def main():
             except Exception as e:
                 print(f"Error: {e}")
             
-            time.sleep(60)
-            # time.sleep(2)
+            # time.sleep(60)
+            time.sleep(2)
 
 if __name__ == "__main__":
     main()
