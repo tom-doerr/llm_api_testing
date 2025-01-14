@@ -16,7 +16,7 @@ def analyze_data(df):
         'average_total_latency': df['total_latency_ms'].mean(),
         'max_total_latency': df['total_latency_ms'].max(),
         'min_total_latency': df['total_latency_ms'].min(),
-        'total_tokens': df['total_tokens'].sum(),
+        'total_completion_tokens': df['completion_tokens'].sum(),
         'total_prompt_tokens': df['prompt_tokens'].sum(),
         'total_requests': len(df),
         'average_prompt_tokens': df['prompt_tokens'].mean()

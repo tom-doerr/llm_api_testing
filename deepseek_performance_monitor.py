@@ -48,7 +48,7 @@ def main():
                 'first_token_latency_ms', 
                 'total_latency_ms',
                 'tokens_per_second', 
-                'total_tokens',
+                'completion_tokens',
                 'prompt_tokens'
             ])
         
@@ -65,7 +65,7 @@ def main():
                     prompt_tokens
                 ])
                 csvfile.flush()  # Ensure data is written to disk immediately
-                print(f"{timestamp} - First Token: {first_token_latency:.2f}ms, Total: {total_latency:.2f}ms, TPS: {tps:.2f}, Tokens: {tokens}, Prompt Tokens: {prompt_tokens}")
+                print(f"{timestamp} - First Token: {first_token_latency:.2f}ms, Total: {total_latency:.2f}ms, TPS: {tps:.2f}, Completion Tokens: {completion_tokens}, Prompt Tokens: {prompt_tokens}")
             except Exception as e:
                 print(f"Error: {e}")
             
