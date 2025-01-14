@@ -49,6 +49,7 @@ The script creates a CSV file `deepseek_performance.csv` with the following colu
 - total_latency_ms: Total response time in milliseconds
 - tokens_per_second: Tokens processed per second
 - total_tokens: Total tokens in the response
+- prompt_tokens: Number of tokens in the prompt
 
 ## 📋 Example Output
 

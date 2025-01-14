@@ -10,6 +10,7 @@ def measure_request():
     start_time = time.time()
     first_token_time = None
     total_tokens = 0
+    prompt_tokens = 0
     
     response = completion(
         model="deepseek/deepseek-chat",
@@ -20,6 +21,8 @@ def measure_request():
     for chunk in response:
         if first_token_time is None:
             first_token_time = time.time()
+            # Get prompt tokens from the first chunk
+            prompt_tokens = chunk.get('usage', {}).get('prompt_tokens', 0)
         content = chunk['choices'][0]['delta'].get('content', '')
         if content:  # Only count tokens if content exists
             total_tokens += len(content.split())
@@ -30,7 +33,7 @@ def measure_request():
     total_time = (end_time - start_time) * 1000
     tokens_per_second = total_tokens / (end_time - start_time) if (end_time - start_time) > 0 else 0
     
-    return time_to_first_token, total_time, tokens_per_second, total_tokens
+    return time_to_first_token, total_time, tokens_per_second, total_tokens, prompt_tokens
 
 def main():
     end_time = datetime.now() + timedelta(hours=72)
@@ -45,22 +48,24 @@ def main():
                 'first_token_latency_ms', 
                 'total_latency_ms',
                 'tokens_per_second', 
-                'total_tokens'
+                'total_tokens',
+                'prompt_tokens'
             ])
         
         while datetime.now() < end_time:
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             try:
-                first_token_latency, total_latency, tps, tokens = measure_request()
+                first_token_latency, total_latency, tps, tokens, prompt_tokens = measure_request()
                 writer.writerow([
                     timestamp, 
                     first_token_latency, 
                     total_latency,
                     tps, 
-                    tokens
+                    tokens,
+                    prompt_tokens
                 ])
                 csvfile.flush()  # Ensure data is written to disk immediately
-                print(f"{timestamp} - First Token: {first_token_latency:.2f}ms, Total: {total_latency:.2f}ms, TPS: {tps:.2f}, Tokens: {tokens}")
+                print(f"{timestamp} - First Token: {first_token_latency:.2f}ms, Total: {total_latency:.2f}ms, TPS: {tps:.2f}, Tokens: {tokens}, Prompt Tokens: {prompt_tokens}")
             except Exception as e:
                 print(f"Error: {e}")
             

@@ -17,7 +17,9 @@ def analyze_data(df):
         'max_total_latency': df['total_latency_ms'].max(),
         'min_total_latency': df['total_latency_ms'].min(),
         'total_tokens': df['total_tokens'].sum(),
-        'total_requests': len(df)
+        'total_prompt_tokens': df['prompt_tokens'].sum(),
+        'total_requests': len(df),
+        'average_prompt_tokens': df['prompt_tokens'].mean()
     }
     return stats
 
@@ -79,6 +81,8 @@ def main():
     print(f"Max Total Latency: {stats['max_total_latency']:.2f} ms")
     print(f"Min Total Latency: {stats['min_total_latency']:.2f} ms")
     print(f"\nTotal Tokens Processed: {stats['total_tokens']}")
+    print(f"Total Prompt Tokens: {stats['total_prompt_tokens']}")
+    print(f"Average Prompt Tokens: {stats['average_prompt_tokens']:.2f}")
     print(f"Total Requests: {stats['total_requests']}")
     
     print(f"\nPlot saved to: {plot_path}")
