@@ -61,7 +61,7 @@ def main():
                     first_token_latency, 
                     total_latency,
                     tps, 
-                    tokens,
+                    completion_tokens,
                     prompt_tokens
                 ])
                 csvfile.flush()  # Ensure data is written to disk immediately
