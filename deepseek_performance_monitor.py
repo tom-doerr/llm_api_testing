@@ -82,7 +82,8 @@ def main():
                 'total_latency_ms',
                 'tokens_per_second', 
                 'completion_tokens',
-                'prompt_tokens'
+                'prompt_tokens',
+                'error'
             ])
         
         while datetime.now() < end_time:
@@ -95,12 +96,24 @@ def main():
                     total_latency,
                     tps, 
                     tokens,
-                    prompt_tokens
+                    prompt_tokens,
+                    ''  # No error
                 ])
                 csvfile.flush()  # Ensure data is written to disk immediately
                 print(f"{timestamp} - First Token: {first_token_latency:.2f}ms, Total: {total_latency:.2f}ms, TPS: {tps:.2f}, Completion Tokens: {tokens}, Prompt Tokens: {prompt_tokens}")
             except Exception as e:
-                print(f"Error: {e}")
+                error_str = str(e)
+                print(f"Error: {error_str}")
+                writer.writerow([
+                    timestamp, 
+                    '',  # No latency data
+                    '', 
+                    '', 
+                    '',
+                    '',
+                    error_str
+                ])
+                csvfile.flush()
             
             # time.sleep(60)
             time.sleep(2)

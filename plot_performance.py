@@ -56,8 +56,10 @@ def plot_data(df, output_dir):
     return plot_path
 
 def main():
-    # Read data
+    # Read data and handle error column
     df = pd.read_csv('deepseek_performance.csv')
+    # Filter out rows with errors for plotting
+    df = df[df['error'].isna()]
     
     # Convert timestamp to datetime
     df['timestamp'] = pd.to_datetime(df['timestamp'])
