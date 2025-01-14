@@ -115,8 +115,8 @@ def main():
                 ])
                 csvfile.flush()
             
-            # time.sleep(60)
-            time.sleep(2)
+            time.sleep(60)
+            # time.sleep(2)
 
 if __name__ == "__main__":
     main()
