@@ -6,15 +6,38 @@ import csv
 from datetime import datetime, timedelta
 from litellm import completion
 
+def generate_random_prompt():
+    """Generate a random prompt with log-distributed length"""
+    import random
+    import string
+    import math
+    
+    # Generate length with log distribution (more short prompts)
+    min_length = 10  # Minimum 10 characters
+    max_length = 1000000  # Maximum 1 million characters
+    log_min = math.log(min_length)
+    log_max = math.log(max_length)
+    log_length = random.uniform(log_min, log_max)
+    length = int(math.exp(log_length))
+    
+    # Generate random content
+    characters = string.ascii_letters + string.digits + string.punctuation + ' '
+    content = ''.join(random.choice(characters) for _ in range(length))
+    
+    return content
+
 def measure_request():
     start_time = time.time()
     first_token_time = None
     total_tokens = 0
     prompt_tokens = 0
     
+    # Generate random prompt
+    prompt_content = generate_random_prompt()
+    
     response = completion(
         model="deepseek/deepseek-chat",
-        messages=[{"role": "user", "content": "Tell me about ancient Rome"}],
+        messages=[{"role": "user", "content": prompt_content}],
         stream=True,
     )
     
