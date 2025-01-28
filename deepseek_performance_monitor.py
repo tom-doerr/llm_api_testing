@@ -29,7 +29,7 @@ def generate_random_prompt():
     
     return content
 
-def measure_request():
+def measure_request(model):
     start_time = time.time()
     first_token_time = None
     total_tokens = 0
@@ -37,9 +37,6 @@ def measure_request():
     
     # Generate random prompt
     prompt_content = generate_random_prompt()
-    
-    # Select model with 10% probability for reasoner
-    model = "deepseek/deepseek-reasoner" if random.random() < 0.1 else "deepseek/deepseek-chat"
     
     # First get prompt tokens from a non-streaming request
     initial_response = completion(
@@ -70,7 +67,7 @@ def measure_request():
     # tokens_per_second = total_tokens / (end_time - start_time) if (end_time - start_time) > 0 else 0
     tokens_per_second = total_tokens / (end_time - first_token_time)
     
-    return time_to_first_token, total_time, tokens_per_second, total_tokens, prompt_tokens, model
+    return time_to_first_token, total_time, tokens_per_second, total_tokens, prompt_tokens
 
 def main():
     end_time = datetime.now() + timedelta(hours=72)
@@ -93,8 +90,10 @@ def main():
         
         while datetime.now() < end_time:
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            # Select model with 10% probability for reasoner
+            model = "deepseek/deepseek-reasoner" if random.random() < 0.1 else "deepseek/deepseek-chat"
             try:
-                first_token_latency, total_latency, tps, tokens, prompt_tokens, model = measure_request()
+                first_token_latency, total_latency, tps, tokens, prompt_tokens = measure_request(model)
                 writer.writerow([
                     timestamp, 
                     first_token_latency, 
