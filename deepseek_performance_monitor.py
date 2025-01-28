@@ -70,7 +70,7 @@ def measure_request():
     # tokens_per_second = total_tokens / (end_time - start_time) if (end_time - start_time) > 0 else 0
     tokens_per_second = total_tokens / (end_time - first_token_time)
     
-    return time_to_first_token, total_time, tokens_per_second, total_tokens, prompt_tokens
+    return time_to_first_token, total_time, tokens_per_second, total_tokens, prompt_tokens, model
 
 def main():
     end_time = datetime.now() + timedelta(hours=72)
@@ -94,7 +94,7 @@ def main():
         while datetime.now() < end_time:
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             try:
-                first_token_latency, total_latency, tps, tokens, prompt_tokens = measure_request()
+                first_token_latency, total_latency, tps, tokens, prompt_tokens, model = measure_request()
                 writer.writerow([
                     timestamp, 
                     first_token_latency, 
