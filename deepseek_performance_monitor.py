@@ -3,6 +3,7 @@
 import time
 import os
 import csv
+import random
 from datetime import datetime, timedelta
 from litellm import completion
 
@@ -37,9 +38,12 @@ def measure_request():
     # Generate random prompt
     prompt_content = generate_random_prompt()
     
+    # Select model with 10% probability for reasoner
+    model = "deepseek/deepseek-reasoner" if random.random() < 0.1 else "deepseek/deepseek-chat"
+    
     # First get prompt tokens from a non-streaming request
     initial_response = completion(
-        model="deepseek/deepseek-chat",
+        model=model,
         messages=[{"role": "user", "content": prompt_content}],
         stream=False,
     )
@@ -47,7 +51,7 @@ def measure_request():
     
     # Then make the streaming request for timing measurements
     response = completion(
-        model="deepseek/deepseek-chat",
+        model=model,
         messages=[{"role": "user", "content": prompt_content}],
         stream=True,
     )
@@ -83,7 +87,8 @@ def main():
                 'tokens_per_second', 
                 'completion_tokens',
                 'prompt_tokens',
-                'error'
+                'error',
+                'model'
             ])
         
         while datetime.now() < end_time:
@@ -97,7 +102,8 @@ def main():
                     tps, 
                     tokens,
                     prompt_tokens,
-                    ''  # No error
+                    '',  # No error
+                    model
                 ])
                 csvfile.flush()  # Ensure data is written to disk immediately
                 print(f"{timestamp} - First Token: {first_token_latency:.2f}ms, Total: {total_latency:.2f}ms, TPS: {tps:.2f}, Completion Tokens: {tokens}, Prompt Tokens: {prompt_tokens}")
@@ -111,7 +117,8 @@ def main():
                     '', 
                     '',
                     '',
-                    error_str
+                    error_str,
+                    model
                 ])
                 csvfile.flush()
             
