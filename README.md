@@ -1,4 +1,4 @@
-<h1 align="center">📊 Deepseek Performance Monitoring</h1>
+<h1 align="center">Deepseek Performance Monitoring</h1>
 
 <p align="center">
     <a href="https://github.com/tom-doerr/llm_api_testing/stargazers"><img src="https://img.shields.io/github/stars/tom-doerr/llm_api_testing?colorA=2c2837&colorB=c9cbff&style=for-the-badge&logo=starship" alt="Repository's stars"/></a>
@@ -15,7 +15,7 @@
     <strong>A performance monitoring solution for Deepseek API using LiteLLM</strong>
 </p>
 
-## 📊 Latest Performance Results
+## Results
 ![Performance Plot](performance_results/performance_plot.png)
 
 ## 🚀 Features
