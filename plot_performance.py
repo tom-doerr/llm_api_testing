@@ -8,13 +8,13 @@ from datetime import datetime
 def has_api_error(row):
     return any('APIError' in str(val) for val in row)
 
-def analyze_data(df):
+def analyze_data(df, api_errors_in_bad_lines=0):
     # Count different types of errors
     total_errors = df['error'].notna().sum()
     context_size_errors = df['error'].str.contains('ContextWindowExceeded|context length', na=False).sum()
-    api_errors = df.apply(has_api_error, axis=1).sum()
+    api_errors = df.apply(has_api_error, axis=1).sum() + api_errors_in_bad_lines
     real_errors = api_errors
-    total_requests = len(df)
+    total_requests = len(df) + api_errors_in_bad_lines  # Include bad lines in total
     
     stats = {
         'default': {
@@ -87,8 +87,13 @@ def plot_data(df, output_dir):
     return plot_path
 
 def main():
-    # Read data and handle error column
-    df = pd.read_csv('deepseek_performance.csv', on_bad_lines='skip')
+    # Read data and capture bad lines
+    bad_lines = []
+    df = pd.read_csv('deepseek_performance.csv', on_bad_lines=lambda x: bad_lines.append(x))
+    
+    # Count API errors in bad lines
+    api_errors_in_bad_lines = sum(1 for line in bad_lines if 'APIError' in str(line))
+    
     # Filter out rows with errors for plotting
     df = df[df['error'].isna()]
     
@@ -96,7 +101,7 @@ def main():
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     
     # Analyze data
-    stats = analyze_data(df)
+    stats = analyze_data(df, api_errors_in_bad_lines)
     
     # Plot data
     output_dir = 'performance_results'
