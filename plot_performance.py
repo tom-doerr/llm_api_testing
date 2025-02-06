@@ -6,54 +6,49 @@ import os
 from datetime import datetime
 
 def analyze_data(df):
-    stats = {}
-    for model in df['model'].unique():
-        model_df = df[df['model'] == model]
-        stats[model] = {
-            'average_tps': model_df['tokens_per_second'].mean(),
-            'max_tps': model_df['tokens_per_second'].max(),
-            'min_tps': model_df['tokens_per_second'].min(),
-            'average_first_token_latency': model_df['first_token_latency_ms'].mean(),
-            'max_first_token_latency': model_df['first_token_latency_ms'].max(),
-            'min_first_token_latency': model_df['first_token_latency_ms'].min(),
-            'average_total_latency': model_df['total_latency_ms'].mean(),
-            'max_total_latency': model_df['total_latency_ms'].max(),
-            'min_total_latency': model_df['total_latency_ms'].min(),
-            'total_completion_tokens': model_df['completion_tokens'].sum(),
-            'total_prompt_tokens': model_df['prompt_tokens'].sum(),
-            'total_requests': len(model_df),
-            'average_prompt_tokens': model_df['prompt_tokens'].mean(),
-            'error_rate': (model_df['error'].notna().sum() / len(model_df)) * 100
+    stats = {
+        'default': {
+            'average_tps': df['tokens_per_second'].mean(),
+            'max_tps': df['tokens_per_second'].max(),
+            'min_tps': df['tokens_per_second'].min(),
+            'average_first_token_latency': df['first_token_latency_ms'].mean(),
+            'max_first_token_latency': df['first_token_latency_ms'].max(),
+            'min_first_token_latency': df['first_token_latency_ms'].min(),
+            'average_total_latency': df['total_latency_ms'].mean(),
+            'max_total_latency': df['total_latency_ms'].max(),
+            'min_total_latency': df['total_latency_ms'].min(),
+            'total_completion_tokens': df['completion_tokens'].sum(),
+            'total_prompt_tokens': df['prompt_tokens'].sum(),
+            'total_requests': len(df),
+            'average_prompt_tokens': df['prompt_tokens'].mean(),
+            'error_rate': (df['error'].notna().sum() / len(df)) * 100 if 'error' in df.columns else 0
         }
+    }
     return stats
 
 def plot_data(df, output_dir):
-    # Create a plot for each model
-    for model in df['model'].unique():
-        model_df = df[df['model'] == model]
-        
-        plt.figure(figsize=(12, 6))
-        
-        # Create primary axis for latency
-        ax1 = plt.gca()
-        ax1.set_xlabel('Time')
-        ax1.set_ylabel('Latency (ms)', color='tab:blue')
-        ax1.plot(model_df['timestamp'], model_df['first_token_latency_ms'], 
-                label='First Token Latency', color='tab:blue', alpha=0.7)
-        ax1.tick_params(axis='y', labelcolor='tab:blue')
-        ax1.legend(loc='upper left')
-        
-        # Create secondary axis for TPS
-        ax2 = ax1.twinx()
-        ax2.set_ylabel('Tokens per Second', color='tab:red')
-        ax2.plot(model_df['timestamp'], model_df['tokens_per_second'], 
-                label='Tokens per Second', color='tab:red', alpha=0.7)
-        ax2.tick_params(axis='y', labelcolor='tab:red')
-        ax2.legend(loc='upper right')
-        
-        plt.title(f'Deepseek API Performance Over Time - {model}')
-        plt.xticks(rotation=45)
-        plt.tight_layout()
+    plt.figure(figsize=(12, 6))
+    
+    # Create primary axis for latency
+    ax1 = plt.gca()
+    ax1.set_xlabel('Time')
+    ax1.set_ylabel('Latency (ms)', color='tab:blue')
+    ax1.plot(df['timestamp'], df['first_token_latency_ms'], 
+            label='First Token Latency', color='tab:blue', alpha=0.7)
+    ax1.tick_params(axis='y', labelcolor='tab:blue')
+    ax1.legend(loc='upper left')
+    
+    # Create secondary axis for TPS
+    ax2 = ax1.twinx()
+    ax2.set_ylabel('Tokens per Second', color='tab:red')
+    ax2.plot(df['timestamp'], df['tokens_per_second'], 
+            label='Tokens per Second', color='tab:red', alpha=0.7)
+    ax2.tick_params(axis='y', labelcolor='tab:red')
+    ax2.legend(loc='upper right')
+    
+    plt.title('Deepseek API Performance Over Time')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
     
     # Create output directory if it doesn't exist
     os.makedirs(output_dir, exist_ok=True)
