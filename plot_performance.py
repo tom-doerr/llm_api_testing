@@ -6,10 +6,11 @@ import os
 from datetime import datetime
 
 def analyze_data(df):
-    # Count errors excluding context size exceeded
+    # Count different types of errors
     total_errors = df['error'].notna().sum()
     context_size_errors = df['error'].str.contains('ContextWindowExceeded|context length', na=False).sum()
-    real_errors = total_errors - context_size_errors
+    api_errors = df['error'].str.contains('APIError', na=False).sum()
+    real_errors = api_errors
     total_requests = len(df)
     
     stats = {
@@ -57,7 +58,7 @@ def plot_data(df, output_dir):
     # Calculate rolling error rate
     window = '15min'  # 15 minute window
     df_rolling = df.set_index('timestamp').resample(window).agg({
-        'error': lambda x: (x.notna() & ~x.str.contains('ContextWindowExceeded|context length', na=False)).sum() / len(x) * 100 if len(x) > 0 else 0
+        'error': lambda x: (x.str.contains('APIError', na=False)).sum() / len(x) * 100 if len(x) > 0 else 0
     }).fillna(0)
     
     ax2.set_xlabel('Time')
@@ -112,8 +113,9 @@ def main():
         print(f"Total Prompt Tokens: {model_stats['total_prompt_tokens']}")
         print(f"Average Prompt Tokens: {model_stats['average_prompt_tokens']:.2f}")
         print(f"Total Requests: {model_stats['total_requests']}")
-        print(f"Error Rate (excluding context size): {model_stats['error_rate']:.2f}%")
+        print(f"API Error Rate: {model_stats['error_rate']:.2f}%")
         print(f"Context Size Errors: {model_stats['context_size_errors']}")
+        print(f"Total API Errors: {real_errors}")
     
     print(f"\nPlot saved to: {plot_path}")
 
