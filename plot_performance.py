@@ -115,7 +115,7 @@ def main():
         print(f"Total Requests: {model_stats['total_requests']}")
         print(f"API Error Rate: {model_stats['error_rate']:.2f}%")
         print(f"Context Size Errors: {model_stats['context_size_errors']}")
-        print(f"Total API Errors: {real_errors}")
+        print(f"Total API Errors: {int(model_stats['error_rate'] * model_stats['total_requests'] / 100)}")
     
     print(f"\nPlot saved to: {plot_path}")
 
