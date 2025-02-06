@@ -37,7 +37,7 @@ def analyze_data(df, api_errors_in_bad_lines=0):
     }
     return stats
 
-def plot_data(df, output_dir):
+def plot_data(df, output_dir, bad_lines_timestamps):
     # Create figure with two subplots
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10), height_ratios=[3, 1])
     
@@ -123,7 +123,7 @@ def main():
     
     # Plot data
     output_dir = 'performance_results'
-    plot_path = plot_data(df, output_dir)
+    plot_path = plot_data(df, output_dir, bad_lines_timestamps)
     
     # Print statistics for each model
     for model, model_stats in stats.items():
