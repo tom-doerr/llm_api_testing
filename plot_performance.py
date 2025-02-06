@@ -8,7 +8,7 @@ from datetime import datetime
 def analyze_data(df):
     # Count errors excluding context size exceeded
     total_errors = df['error'].notna().sum()
-    context_size_errors = df['error'].str.contains('context size exceeded', na=False).sum()
+    context_size_errors = df['error'].str.contains('ContextWindowExceeded|context length', na=False).sum()
     real_errors = total_errors - context_size_errors
     total_requests = len(df)
     
@@ -34,10 +34,10 @@ def analyze_data(df):
     return stats
 
 def plot_data(df, output_dir):
-    plt.figure(figsize=(12, 6))
+    # Create figure with two subplots
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10), height_ratios=[3, 1])
     
-    # Create primary axis for latency
-    ax1 = plt.gca()
+    # Top subplot for latency and TPS
     ax1.set_xlabel('Time')
     ax1.set_ylabel('Latency (ms)', color='tab:blue')
     ax1.plot(df['timestamp'], df['first_token_latency_ms'], 
@@ -46,15 +46,28 @@ def plot_data(df, output_dir):
     ax1.legend(loc='upper left')
     
     # Create secondary axis for TPS
-    ax2 = ax1.twinx()
-    ax2.set_ylabel('Tokens per Second', color='tab:red')
-    ax2.plot(df['timestamp'], df['tokens_per_second'], 
+    ax1_twin = ax1.twinx()
+    ax1_twin.set_ylabel('Tokens per Second', color='tab:red')
+    ax1_twin.plot(df['timestamp'], df['tokens_per_second'], 
             label='Tokens per Second', color='tab:red', alpha=0.7)
-    ax2.tick_params(axis='y', labelcolor='tab:red')
-    ax2.legend(loc='upper right')
+    ax1_twin.tick_params(axis='y', labelcolor='tab:red')
+    ax1_twin.legend(loc='upper right')
     
-    plt.title('Deepseek API Performance Over Time')
-    plt.xticks(rotation=45)
+    # Bottom subplot for error rate
+    # Calculate rolling error rate
+    window = '1H'  # 1 hour window
+    df_rolling = df.set_index('timestamp').resample(window).agg({
+        'error': lambda x: (x.notna() & ~x.str.contains('ContextWindowExceeded|context length', na=False)).mean() * 100
+    }).fillna(0)
+    
+    ax2.set_xlabel('Time')
+    ax2.set_ylabel('Error Rate (%)')
+    ax2.plot(df_rolling.index, df_rolling['error'], color='tab:orange', label='Error Rate')
+    ax2.fill_between(df_rolling.index, df_rolling['error'], alpha=0.3, color='tab:orange')
+    ax2.legend(loc='upper right')
+    ax2.grid(True, alpha=0.3)
+    
+    plt.suptitle('Deepseek API Performance Over Time')
     plt.tight_layout()
     
     # Create output directory if it doesn't exist
