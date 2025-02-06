@@ -4,6 +4,7 @@ import time
 import os
 import csv
 import random
+import argparse
 from datetime import datetime, timedelta
 from litellm import completion
 
@@ -69,14 +70,25 @@ def measure_request(model):
     
     return time_to_first_token, total_time, tokens_per_second, total_tokens, prompt_tokens
 
+def parse_args():
+    parser = argparse.ArgumentParser(description='Monitor Deepseek API performance')
+    parser.add_argument('--duration', type=int, default=72,
+                       help='Duration to run in hours (default: 72)')
+    parser.add_argument('--interval', type=int, default=60,
+                       help='Interval between requests in seconds (default: 60)')
+    parser.add_argument('--output', type=str, default='deepseek_performance.csv',
+                       help='Output CSV file (default: deepseek_performance.csv)')
+    parser.add_argument('--reasoner-ratio', type=float, default=0.1,
+                       help='Probability of using deepseek-reasoner model (default: 0.1)')
+    return parser.parse_args()
+
 def main():
-    # Get duration from environment variable or use default
-    hours = int(os.getenv('MONITOR_DURATION_HOURS', '72'))
-    end_time = datetime.now() + timedelta(hours=hours)
+    args = parse_args()
+    end_time = datetime.now() + timedelta(hours=args.duration)
     # Check if file exists to determine if we need to write header
     write_header = not os.path.exists('deepseek_performance.csv')
     
-    with open('deepseek_performance.csv', 'a', newline='') as csvfile:
+    with open(args.output, 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
         if write_header:
             writer.writerow([
@@ -92,8 +104,8 @@ def main():
         
         while datetime.now() < end_time:
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            # Select model with 10% probability for reasoner
-            model = "deepseek/deepseek-reasoner" if random.random() < 0.1 else "deepseek/deepseek-chat"
+            # Select model based on reasoner ratio
+            model = "deepseek/deepseek-reasoner" if random.random() < args.reasoner_ratio else "deepseek/deepseek-chat"
             try:
                 first_token_latency, total_latency, tps, tokens, prompt_tokens = measure_request(model)
                 writer.writerow([
@@ -123,8 +135,7 @@ def main():
                 ])
                 csvfile.flush()
             
-            time.sleep(60)
-            # time.sleep(2)
+            time.sleep(args.interval)
 
 if __name__ == "__main__":
     main()
