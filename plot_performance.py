@@ -67,7 +67,7 @@ def plot_data(df, output_dir):
 
 def main():
     # Read data and handle error column
-    df = pd.read_csv('deepseek_performance.csv')
+    df = pd.read_csv('deepseek_performance.csv', on_bad_lines='skip')
     # Filter out rows with errors for plotting
     df = df[df['error'].isna()]
     
