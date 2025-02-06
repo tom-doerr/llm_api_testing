@@ -70,7 +70,9 @@ def measure_request(model):
     return time_to_first_token, total_time, tokens_per_second, total_tokens, prompt_tokens
 
 def main():
-    end_time = datetime.now() + timedelta(hours=72)
+    # Get duration from environment variable or use default
+    hours = int(os.getenv('MONITOR_DURATION_HOURS', '72'))
+    end_time = datetime.now() + timedelta(hours=hours)
     # Check if file exists to determine if we need to write header
     write_header = not os.path.exists('deepseek_performance.csv')
     
