@@ -72,8 +72,8 @@ def measure_request(model):
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Monitor Deepseek API performance')
-    parser.add_argument('--duration', type=int, default=72,
-                       help='Duration to run in hours (default: 72)')
+    parser.add_argument('--duration', type=int, default=24,
+                       help='Duration to run in hours (default: 24)')
     parser.add_argument('--interval', type=int, default=60,
                        help='Interval between requests in seconds (default: 60)')
     parser.add_argument('--output', type=str, default='deepseek_performance.csv',

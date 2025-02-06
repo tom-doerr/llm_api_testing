@@ -48,7 +48,7 @@ python3 deepseek_performance_monitor.py --output custom_results.csv --reasoner-r
 ```
 
 ### Command-line Options
-- `--duration`: Test duration in hours (default: 72)
+- `--duration`: Test duration in hours (default: 24)
 - `--interval`: Time between requests in seconds (default: 60)
 - `--output`: Output CSV file path (default: deepseek_performance.csv)
 - `--reasoner-ratio`: Probability of using deepseek-reasoner model (default: 0.1)
