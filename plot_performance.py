@@ -55,9 +55,9 @@ def plot_data(df, output_dir):
     
     # Bottom subplot for error rate
     # Calculate rolling error rate
-    window = '1H'  # 1 hour window
+    window = '15min'  # 15 minute window
     df_rolling = df.set_index('timestamp').resample(window).agg({
-        'error': lambda x: (x.notna() & ~x.str.contains('ContextWindowExceeded|context length', na=False)).mean() * 100
+        'error': lambda x: (x.notna() & ~x.str.contains('ContextWindowExceeded|context length', na=False)).sum() / len(x) * 100 if len(x) > 0 else 0
     }).fillna(0)
     
     ax2.set_xlabel('Time')
