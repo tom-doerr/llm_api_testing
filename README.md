@@ -1,17 +1,32 @@
-<div align="center">
-  <h1>📊 Deepseek Performance Monitoring</h1>
-  
-  <p>
-    <img src="https://img.shields.io/badge/Material-Design-blue?style=flat&logo=material-design&logoColor=white" alt="Material Design">
-    <img src="https://img.shields.io/badge/Python-3.8+-blue?style=flat&logo=python&logoColor=white" alt="Python">
-    <img src="https://img.shields.io/badge/License-MIT-green?style=flat" alt="License">
-  </p>
-  
-  <p>
-    <img src="https://img.shields.io/github/last-commit/tom-doerr/llm_api_testing?style=flat&color=6200ea" alt="Last Commit">
-    <img src="https://img.shields.io/github/repo-size/tom-doerr/llm_api_testing?style=flat&color=6200ea" alt="Repo Size">
-    <img src="https://img.shields.io/github/languages/code-size/tom-doerr/llm_api_testing?style=flat&color=6200ea" alt="Code Size">
-  </p>
+<h1 align="center">📊 Deepseek Performance Monitoring</h1>
+
+<p align="center">
+    <a href="https://github.com/tom-doerr/llm_api_testing/stargazers"
+        ><img
+            src="https://img.shields.io/github/stars/tom-doerr/llm_api_testing?colorA=2c2837&colorB=c9cbff&style=for-the-badge&logo=starship style=flat-square"
+            alt="Repository's starts"
+    /></a>
+    <a href="https://github.com/tom-doerr/llm_api_testing/issues"
+        ><img
+            src="https://img.shields.io/github/issues-raw/tom-doerr/llm_api_testing?colorA=2c2837&colorB=f2cdcd&style=for-the-badge&logo=starship style=flat-square"
+            alt="Issues"
+    /></a>
+    <a href="https://github.com/tom-doerr/llm_api_testing/blob/main/LICENSE"
+        ><img
+            src="https://img.shields.io/github/license/tom-doerr/llm_api_testing?colorA=2c2837&colorB=b5e8e0&style=for-the-badge&logo=starship style=flat-square"
+            alt="License"
+    /><br />
+    <a href="https://github.com/tom-doerr/llm_api_testing/commits/main"
+        ><img
+            src="https://img.shields.io/github/last-commit/tom-doerr/llm_api_testing/main?colorA=2c2837&colorB=ddb6f2&style=for-the-badge&logo=starship style=flat-square"
+            alt="Latest commit"
+    /></a>
+    <a href="https://github.com/tom-doerr/llm_api_testing"
+        ><img
+            src="https://img.shields.io/github/repo-size/tom-doerr/llm_api_testing?colorA=2c2837&colorB=89DCEB&style=for-the-badge&logo=starship style=flat-square"
+            alt="GitHub repository size"
+    /></a>
+</p>
   
   <p>
     <strong>A performance monitoring solution for Deepseek API using LiteLLM</strong>
