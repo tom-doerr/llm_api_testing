@@ -89,7 +89,7 @@ def plot_data(df, output_dir):
 def main():
     # Read data and capture bad lines
     bad_lines = []
-    df = pd.read_csv('deepseek_performance.csv', on_bad_lines=lambda x: bad_lines.append(x))
+    df = pd.read_csv('deepseek_performance.csv', engine='python', on_bad_lines=lambda x: bad_lines.append(x))
     
     # Count API errors in bad lines
     api_errors_in_bad_lines = sum(1 for line in bad_lines if 'APIError' in str(line))
