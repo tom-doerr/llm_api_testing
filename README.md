@@ -1,39 +1,21 @@
 <h1 align="center">📊 Deepseek Performance Monitoring</h1>
 
 <p align="center">
-    <a href="https://github.com/tom-doerr/llm_api_testing/stargazers"
-        ><img
-            src="https://img.shields.io/github/stars/tom-doerr/llm_api_testing?colorA=2c2837&colorB=c9cbff&style=for-the-badge&logo=starship style=flat-square"
-            alt="Repository's starts"
-    /></a>
-    <a href="https://github.com/tom-doerr/llm_api_testing/issues"
-        ><img
-            src="https://img.shields.io/github/issues-raw/tom-doerr/llm_api_testing?colorA=2c2837&colorB=f2cdcd&style=for-the-badge&logo=starship style=flat-square"
-            alt="Issues"
-    /></a>
-    <a href="https://github.com/tom-doerr/llm_api_testing/blob/main/LICENSE"
-        ><img
-            src="https://img.shields.io/github/license/tom-doerr/llm_api_testing?colorA=2c2837&colorB=b5e8e0&style=for-the-badge&logo=starship style=flat-square"
-            alt="License"
-    /><br />
-    <a href="https://github.com/tom-doerr/llm_api_testing/commits/main"
-        ><img
-            src="https://img.shields.io/github/last-commit/tom-doerr/llm_api_testing/main?colorA=2c2837&colorB=ddb6f2&style=for-the-badge&logo=starship style=flat-square"
-            alt="Latest commit"
-    /></a>
-    <a href="https://github.com/tom-doerr/llm_api_testing"
-        ><img
-            src="https://img.shields.io/github/repo-size/tom-doerr/llm_api_testing?colorA=2c2837&colorB=89DCEB&style=for-the-badge&logo=starship style=flat-square"
-            alt="GitHub repository size"
-    /></a>
+    <a href="https://github.com/tom-doerr/llm_api_testing/stargazers"><img src="https://img.shields.io/github/stars/tom-doerr/llm_api_testing?colorA=2c2837&colorB=c9cbff&style=for-the-badge&logo=starship" alt="Repository's stars"/></a>
+    <a href="https://github.com/tom-doerr/llm_api_testing/issues"><img src="https://img.shields.io/github/issues-raw/tom-doerr/llm_api_testing?colorA=2c2837&colorB=f2cdcd&style=for-the-badge&logo=starship" alt="Issues"/></a>
+    <a href="https://github.com/tom-doerr/llm_api_testing/blob/main/LICENSE"><img src="https://img.shields.io/github/license/tom-doerr/llm_api_testing?colorA=2c2837&colorB=b5e8e0&style=for-the-badge&logo=starship" alt="License"/></a>
+    <br/>
+    <a href="https://github.com/tom-doerr/llm_api_testing/commits/main"><img src="https://img.shields.io/github/last-commit/tom-doerr/llm_api_testing/main?colorA=2c2837&colorB=ddb6f2&style=for-the-badge&logo=starship" alt="Latest commit"/></a>
+    <a href="https://github.com/tom-doerr/llm_api_testing"><img src="https://img.shields.io/github/repo-size/tom-doerr/llm_api_testing?colorA=2c2837&colorB=89DCEB&style=for-the-badge&logo=starship" alt="GitHub repository size"/></a>
+    <a href="https://pypi.org/project/litellm/"><img src="https://img.shields.io/pypi/v/litellm?colorA=2c2837&colorB=f5c2e7&style=for-the-badge&logo=pypi" alt="PyPI version"/></a>
+    <a href="https://python.org"><img src="https://img.shields.io/badge/python-3.7+-blue.svg?colorA=2c2837&colorB=cba6f7&style=for-the-badge&logo=python" alt="Python Version"/></a>
 </p>
-  
-  <p>
-    <strong>A performance monitoring solution for Deepseek API using LiteLLM</strong>
-  </p>
-</div>
 
-### Performance Plot
+<p align="center">
+    <strong>A performance monitoring solution for Deepseek API using LiteLLM</strong>
+</p>
+
+## 📊 Latest Performance Results
 ![Performance Plot](performance_results/performance_plot.png)
 
 ## 🚀 Features
