@@ -6,6 +6,12 @@ import os
 from datetime import datetime
 
 def analyze_data(df):
+    # Count errors excluding context size exceeded
+    total_errors = df['error'].notna().sum()
+    context_size_errors = df['error'].str.contains('context size exceeded', na=False).sum()
+    real_errors = total_errors - context_size_errors
+    total_requests = len(df)
+    
     stats = {
         'default': {
             'average_tps': df['tokens_per_second'].mean(),
@@ -19,9 +25,10 @@ def analyze_data(df):
             'min_total_latency': df['total_latency_ms'].min(),
             'total_completion_tokens': df['completion_tokens'].sum(),
             'total_prompt_tokens': df['prompt_tokens'].sum(),
-            'total_requests': len(df),
+            'total_requests': total_requests,
             'average_prompt_tokens': df['prompt_tokens'].mean(),
-            'error_rate': (df['error'].notna().sum() / len(df)) * 100 if 'error' in df.columns else 0
+            'error_rate': (real_errors / total_requests) * 100 if 'error' in df.columns else 0,
+            'context_size_errors': context_size_errors
         }
     }
     return stats
@@ -92,7 +99,8 @@ def main():
         print(f"Total Prompt Tokens: {model_stats['total_prompt_tokens']}")
         print(f"Average Prompt Tokens: {model_stats['average_prompt_tokens']:.2f}")
         print(f"Total Requests: {model_stats['total_requests']}")
-        print(f"Error Rate: {model_stats['error_rate']:.2f}%")
+        print(f"Error Rate (excluding context size): {model_stats['error_rate']:.2f}%")
+        print(f"Context Size Errors: {model_stats['context_size_errors']}")
     
     print(f"\nPlot saved to: {plot_path}")
 
