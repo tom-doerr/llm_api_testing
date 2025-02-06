@@ -60,9 +60,15 @@ def plot_data(df, output_dir):
     # Bottom subplot for error rate
     # Calculate rolling error rate
     window = '15min'  # 15 minute window
-    # Add API error column for resampling
-    df['has_api_error'] = df.apply(has_api_error, axis=1)
-    df_rolling = df.set_index('timestamp').resample(window).agg({
+    
+    # Create a DataFrame with all timestamps including bad lines
+    all_errors_df = pd.DataFrame({
+        'timestamp': pd.to_datetime(bad_lines_timestamps + df['timestamp'].tolist()),
+        'has_api_error': [1] * len(bad_lines_timestamps) + [0] * len(df)
+    })
+    
+    # Calculate rolling error rate
+    df_rolling = all_errors_df.set_index('timestamp').resample(window).agg({
         'has_api_error': lambda x: x.sum() / len(x) * 100 if len(x) > 0 else 0
     }).fillna(0)
     
@@ -89,10 +95,22 @@ def plot_data(df, output_dir):
 def main():
     # Read data and capture bad lines
     bad_lines = []
-    df = pd.read_csv('deepseek_performance.csv', engine='python', on_bad_lines=lambda x: bad_lines.append(x))
+    bad_lines_timestamps = []
+    
+    def capture_bad_line(x):
+        try:
+            # Extract timestamp from the start of the line
+            timestamp = x[0].split(',')[0]
+            if 'APIError' in str(x):
+                bad_lines_timestamps.append(timestamp)
+            bad_lines.append(x)
+        except:
+            bad_lines.append(x)
+    
+    df = pd.read_csv('deepseek_performance.csv', engine='python', on_bad_lines=capture_bad_line)
     
     # Count API errors in bad lines
-    api_errors_in_bad_lines = sum(1 for line in bad_lines if 'APIError' in str(line))
+    api_errors_in_bad_lines = len(bad_lines_timestamps)
     
     # Filter out rows with errors for plotting
     df = df[df['error'].isna()]
