@@ -21,9 +21,11 @@
 ## 🚀 Features
 - Measures response latency in milliseconds
 - Calculates tokens processed per second
-- Runs in 1-minute intervals
-- Logs results to CSV file
-- Runs for 24 hours
+- Configurable monitoring intervals
+- Comprehensive CSV logging
+- Adjustable test duration
+- Support for multiple Deepseek models
+- Random prompt generation with configurable distribution
 
 ## 🛠️ Usage
 
@@ -33,10 +35,23 @@
 export DEEPSEEK_API_KEY='your_api_key_here'
 ```
 
-3. Run the script:
+3. Run the script with desired options:
 ```bash
+# Basic usage with default settings
 python3 deepseek_performance_monitor.py
+
+# Run for 1 week with 30-second intervals
+python3 deepseek_performance_monitor.py --duration 168 --interval 30
+
+# Custom output file and increased reasoner model usage
+python3 deepseek_performance_monitor.py --output custom_results.csv --reasoner-ratio 0.2
 ```
+
+### Command-line Options
+- `--duration`: Test duration in hours (default: 72)
+- `--interval`: Time between requests in seconds (default: 60)
+- `--output`: Output CSV file path (default: deepseek_performance.csv)
+- `--reasoner-ratio`: Probability of using deepseek-reasoner model (default: 0.1)
 
 ## 📈 Output
 
@@ -79,6 +94,8 @@ Total Requests: 13
 - Deepseek API key
 
 ## 📝 Notes
-- The script will run for 24 hours unless interrupted
-- Errors are logged to console but don't stop execution
+- Errors are logged to console and CSV but don't stop execution
 - Results are saved to CSV for later analysis
+- Supports both deepseek-chat and deepseek-reasoner models
+- Random prompt generation ensures diverse testing scenarios
+- Error rate tracking excludes context size exceeded errors
