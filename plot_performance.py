@@ -5,11 +5,11 @@ import matplotlib.pyplot as plt
 import os
 from datetime import datetime
 
+def has_api_error(row):
+    return any('APIError' in str(val) for val in row)
+
 def analyze_data(df):
     # Count different types of errors
-    def has_api_error(row):
-        return any('APIError' in str(val) for val in row)
-    
     total_errors = df['error'].notna().sum()
     context_size_errors = df['error'].str.contains('ContextWindowExceeded|context length', na=False).sum()
     api_errors = df.apply(has_api_error, axis=1).sum()
