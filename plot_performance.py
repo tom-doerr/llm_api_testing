@@ -7,9 +7,12 @@ from datetime import datetime
 
 def analyze_data(df):
     # Count different types of errors
+    def has_api_error(row):
+        return any('APIError' in str(val) for val in row)
+    
     total_errors = df['error'].notna().sum()
     context_size_errors = df['error'].str.contains('ContextWindowExceeded|context length', na=False).sum()
-    api_errors = df['error'].str.contains('APIError', na=False).sum()
+    api_errors = df.apply(has_api_error, axis=1).sum()
     real_errors = api_errors
     total_requests = len(df)
     
@@ -57,14 +60,16 @@ def plot_data(df, output_dir):
     # Bottom subplot for error rate
     # Calculate rolling error rate
     window = '15min'  # 15 minute window
+    # Add API error column for resampling
+    df['has_api_error'] = df.apply(has_api_error, axis=1)
     df_rolling = df.set_index('timestamp').resample(window).agg({
-        'error': lambda x: (x.str.contains('APIError', na=False)).sum() / len(x) * 100 if len(x) > 0 else 0
+        'has_api_error': lambda x: x.sum() / len(x) * 100 if len(x) > 0 else 0
     }).fillna(0)
     
     ax2.set_xlabel('Time')
     ax2.set_ylabel('Error Rate (%)')
-    ax2.plot(df_rolling.index, df_rolling['error'], color='tab:orange', label='Error Rate')
-    ax2.fill_between(df_rolling.index, df_rolling['error'], alpha=0.3, color='tab:orange')
+    ax2.plot(df_rolling.index, df_rolling['has_api_error'], color='tab:orange', label='Error Rate')
+    ax2.fill_between(df_rolling.index, df_rolling['has_api_error'], alpha=0.3, color='tab:orange')
     ax2.legend(loc='upper right')
     ax2.grid(True, alpha=0.3)
     
